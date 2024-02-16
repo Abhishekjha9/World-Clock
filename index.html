@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Clock</title>
+    <link rel="icon" href="icon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nova+Square&family=Teko:wght@300..700&display=swap');
+
+        body {
+            background-color: rgb(22, 22, 22);
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', Courier, monospace;
+            color: aliceblue;
+        }
+
+        #background-video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        body h1 {
+            font-family: "Nova Square", sans-serif;
+            text-decoration: underline;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 7rem;
+        }
+
+        #time-text {
+            text-align: center;
+            font-family: "Teko", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            color: rgb(200, 253, 255);
+            animation: floating 3s ease-in-out infinite
+        }
+
+        #greeting-text {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        #time {
+            font-size: 20rem;
+            margin: 0;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translate(0, 0px);
+            }
+
+            50% {
+                transform: translate(0, 15px);
+            }
+
+            100% {
+                transform: translate(0, -0px);
+            }
+        }
+
+        ::selection {
+            color: rgb(26, 26, 26);
+            background: #ffe96f;
+        }
+    </style>
+</head>
+
+<body>
+    <video src="earth-bg.mp4" autoplay loop muted id="background-video"></video>
+    <h1>WORLD CLOCK</h1>
+    <p id="greeting-text"></p>
+    <div id="time-text">
+        <p id="time"></p>
+    </div>
+
+    <script>
+        let naam = prompt("Enter Your Name:")
+        let greeting = document.getElementById("greeting-text")
+
+        greeting.innerHTML = "Hello " + naam + ", Right Now The Time Is:"
+
+        const timeElement = document.getElementById("time");
+
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+
+            const clockStr = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            timeElement.innerText = clockStr;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+
+</html>
